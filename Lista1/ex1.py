@@ -2,9 +2,9 @@ import networkx as nx
 import random
 import numpy as np
 
-def gerar_grafo_e_matriz(n_vertices, min_edges, max_edges):
+def gerar_grafo_e_matriz(n_vertices, min_aresta, max_aresta):
     # Gerar número aleatório de ligações dentro do intervalo especificado
-    n_edges = random.randint(min_edges * n_vertices, max_edges * n_vertices)
+    n_arestas = random.randint(min_aresta * n_vertices, max_aresta * n_vertices)
     
     # Criar um grafo não orientado
     G = nx.Graph()
@@ -12,7 +12,7 @@ def gerar_grafo_e_matriz(n_vertices, min_edges, max_edges):
     G.add_nodes_from(range(n_vertices))
     
     # Adicionar ligações de forma aleatória até atingir o número desejado de ligações
-    while G.number_of_edges() < n_edges:
+    while G.number_of_edges() < n_arestas:
         # Escolher dois vértices aleatoriamente de uma lista dos nós
         u, v = random.sample(list(G.nodes), 2)
         # Adicionar uma ligação entre os vértices se ainda não existir
@@ -33,11 +33,10 @@ matriz_densa = matriz_exemplo.todense()
 print(matriz_densa)
 
 # Calcular o indice de cada vértice usando a matriz de adjacência
-graus = np.sum(matriz_densa, axis=1)
-print("Graus dos vértices:", graus)
+indices = np.sum(matriz_densa, axis=1)
+print("Indices dos vértices:", indices)
 
 # Determinar o número de triângulos no grafo
 triangulos = np.trace(matriz_densa @ matriz_densa @ matriz_densa) // 6
 print("Número de triângulos:", triangulos)
-
-#graus tem que trocar para indice dos vertices    
+  
