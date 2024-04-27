@@ -8,7 +8,7 @@ def matriz_para_vetor_binario(matriz):
                 vetor_binario.append(1)
             else:
                 vetor_binario.append(0)
-    
+
     return vetor_binario
 
 # Exemplo de matriz para testar o algoritmo

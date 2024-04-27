@@ -17,3 +17,41 @@ interseção ) entre duas matrizes utilizando suas respectivas representações 
 
 <b>Obs.: Todos os algoritmos devem ser testados bem como determinado as suas funções de 
 complexidade.</b>
+
+
+exemplo da possibilidade:
+import random
+
+def gerar_grafo(num_vertices, num_arestas):
+    if num_arestas < num_vertices - 1:
+        print("Número de arestas é muito baixo para conectar todos os vértices.")
+        return
+
+    # Inicializa os vértices
+    vertices = list(range(num_vertices))
+
+    # Inicializa um conjunto para armazenar as arestas de forma única
+    arestas = set()
+
+    # Garante que o grafo é conectado
+    for i in range(1, num_vertices):
+        arestas.add((min(i, i-1), max(i, i-1)))
+
+    # Adiciona arestas aleatórias até alcançar o número desejado
+    while len(arestas) < num_arestas:
+        a = random.randint(0, num_vertices - 1)
+        b = random.randint(0, num_vertices - 1)
+        if a != b:
+            arestas.add((min(a, b), max(a, b)))
+
+    return list(arestas)
+
+# Número de vértices
+n_vertices = 100
+# Número de arestas
+n_arestas = random.randint(n_vertices, 10 * n_vertices)
+
+# Gerar o grafo
+grafo = gerar_grafo(n_vertices, n_arestas)
+print("Número de arestas:", len(grafo))
+print("Arestas:", grafo)
