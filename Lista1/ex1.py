@@ -34,21 +34,6 @@ def calcular_numero_de_triangulos(matriz):
                     triangulos += 1
     return triangulos // 6
 
-# Configurações do grafo
-n_vertices = 10
-min_aresta = 1
-max_aresta = 10
-
-# Geração do grafo e cálculo de propriedades
-matriz_adjacencia = gerar_grafo_e_matriz(n_vertices, min_aresta, max_aresta)
-print("Matriz de Adjacência:")
-imprimir_matriz(matriz_adjacencia)
-
-indices = calcular_indices_dos_vertices(matriz_adjacencia)
-print("Indices dos vértices:", indices)
-
-triangulos = calcular_numero_de_triangulos(matriz_adjacencia)
-print("Número de triângulos:", triangulos)
 
 
 

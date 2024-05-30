@@ -1,5 +1,5 @@
 from ex1 import gerar_grafo_e_matriz, imprimir_matriz, calcular_indices_dos_vertices, calcular_numero_de_triangulos
-from ex2 import gerar_grafo_e_matriz
+from ex2 import gerar_matriz_binaria
 from ex3 import gerar_vetor_triangular_superior
 from ex4 import gerar_vetor_compactado
 from ex5 import vetor_compactado_para_matriz
@@ -14,14 +14,14 @@ def main():
 
     while True:
         print("\nMenu de Opções:")
-        print("1. Executar exercício 1 (Gerar Grafo e Matriz)")
-        print("2. Executar exercício 2 (Calcular Vetor Triangular Superior)")
-        print("3. Executar exercício 3 (Gerar Vetor Triangular Superior)")
-        print("4. Executar exercício 4 (Gerar Vetor Compactado)")
-        print("5. Executar exercício 5 (Converter Vetor Compactado para Matriz)")
-        print("6. Executar exercício 6 (Mapeamento ij para k)")
-        print("7. Executar exercício 7 (Mapeamento k para ij)")
-        print("8. Executar exercício 8 (Operações com Vetores)")
+        print("1. Executar exercício 1")
+        print("2. Executar exercício 2")
+        print("3. Executar exercício 3")
+        print("4. Executar exercício 4")
+        print("5. Executar exercício 5")
+        print("6. Executar exercício 6")
+        print("7. Executar exercício 7")
+        print("8. Executar exercício 8")
         print("0. Sair")
 
         opcao = input("Escolha uma opção: ")
@@ -38,9 +38,11 @@ def main():
             triangulos = calcular_numero_de_triangulos(matriz_adjacencia)
             print("Número de triângulos:", triangulos)
         
-        elif opcao == "2" and matriz_adjacencia is not None:
-            matriz_adjacencia_binaria = gerar_grafo_e_matriz(n_vertices, min_aresta, max_aresta)
-            print("Vetor triangular superior:", matriz_adjacencia_binaria)
+        elif opcao == "2":
+            matriz_adjacencia_binaria = gerar_matriz_binaria(n_vertices, min_aresta, max_aresta)
+            print("Matriz de Adjacência Binaria:")
+            imprimir_matriz(matriz_adjacencia_binaria)
+    
 
         elif opcao == "3" and matriz_adjacencia is not None:
             vetor_triangular = gerar_vetor_triangular_superior(matriz_adjacencia)
