@@ -1,30 +1,18 @@
+#Cálculo analítico (algoritmo raiz quadrada)
+
 import math
 
-def mapeamento_inverso_analitico(k, n):
-   # Encontra a linha i usando o método analítico
-    i = 0
-    while (i * (2 * n - i + 1)) // 2 <= k:
-        i += 1
-    i -= 1  # Decrementa para obter o valor correto de i após ultrapassar o limite
-
-    # Calcula o total de elementos até a linha i
-    total_elementos_antes_i = (i * (2 * n - i + 1)) // 2
-
-    # Calcula j baseado no valor de k
-    j = k - total_elementos_antes_i + i
-    
+def mapear_k_para_ij(k, n):
+    i = int(math.floor((2 * n - 1 - math.sqrt((2 * n - 1)**2 - 8 * k)) / 2))
+    j = k + i + 1 - n * i + (i * (i + 1)) // 2
     return (i, j)
 
-def mapeamento_inverso_iterativo(k, n):
-    contador = 0
-    for i in range(n):
-        for j in range(i, n):
-            if contador == k:
-                return (i, j)
-            contador += 1
+#Procedimento iterativo
 
-# Testando as funções para k = 3 e n = 3
-k, n = 3, 3
-posicao_ij_analitico = mapeamento_inverso_analitico(k, n)
-posicao_ij_iterativo = mapeamento_inverso_iterativo(k, n)
-print(posicao_ij_analitico, posicao_ij_iterativo)
+def mapear_k_para_ij_iterativo(k, n):
+    i = 0
+    while k >= (n - i - 1):
+        k -= (n - i - 1)
+        i += 1
+    j = k + i + 1
+    return (i, j)
