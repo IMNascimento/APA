@@ -1,11 +1,12 @@
 import random
 
 def gerar_grafo_e_matriz(n_vertices, min_aresta, max_aresta):
-    n_arestas = random.randint(min_aresta * n_vertices, max_aresta * n_vertices)
-    matriz_adjacencia = [[0] * n_vertices for _ in range(n_vertices)]
+    max_arestas_possivel = n_vertices * (n_vertices - 1) // 2
+    n_arestas = random.randint(min_aresta * n_vertices, min(max_aresta * n_vertices, max_arestas_possivel))
     
-    # Adicionar ligações de forma aleatória até atingir o número desejado de ligações
+    matriz_adjacencia = [[0] * n_vertices for _ in range(n_vertices)]
     arestas_adicionadas = 0
+    
     while arestas_adicionadas < n_arestas:
         u = random.randint(0, n_vertices - 1)
         v = random.randint(0, n_vertices - 1)
