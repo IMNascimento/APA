@@ -1,34 +1,32 @@
-import numpy as np
 import random
 
-def gerar_matriz_adjacencia_binaria(n_vertices, min_arestas, max_arestas):
-    # Criar uma matriz de adjacência binária inicialmente preenchida com zeros
-    matriz_adjacencia = np.zeros((n_vertices, n_vertices), dtype=int)
+def gerar_grafo_e_matriz(n_vertices, min_aresta, max_aresta):
+    max_arestas_possivel = n_vertices * (n_vertices - 1) // 2
+    n_arestas = random.randint(min_aresta * n_vertices, min(max_aresta * n_vertices, max_arestas_possivel))
+    matriz_adjacencia = [[0] * n_vertices for _ in range(n_vertices)]
+    arestas_adicionadas = 0
     
-    # Determinar o número total de arestas a serem adicionadas
-    n_arestas = random.randint(min_arestas * n_vertices, max_arestas * n_vertices)
-    
-    # Adicionar arestas aleatoriamente até alcançar o número desejado
-    adicionar_arestas = 0
-    while adicionar_arestas < n_arestas:
-        # Selecionar dois vértices aleatórios
-        u, v = random.sample(range(n_vertices), 2)
-        # Adicionar uma aresta se não houver uma já entre esses dois vértices
-        m = matriz_adjacencia[u, v]
-        if matriz_adjacencia[u, v] == 0 and u != v:
-            matriz_adjacencia[u, v] = 1
-            matriz_adjacencia[v, u] = 1  # Garantir a simetria, já que o grafo é não orientado
-            adicionar_arestas += 1
+    while arestas_adicionadas < n_arestas:
+        u = random.randint(0, n_vertices - 1)
+        v = random.randint(0, n_vertices - 1)
+        if u != v and matriz_adjacencia[u][v] == 0:
+            matriz_adjacencia[u][v] = 1
+            matriz_adjacencia[v][u] = 1
+            arestas_adicionadas += 1
 
     return matriz_adjacencia
 
-# Definições para o exemplo
+def imprimir_matriz(matriz):
+    for row in matriz:
+        print(row)
+
+
+# Configurações do grafo
 n_vertices = 10
-min_arestas = 1  # mínimo de arestas (1x número de vértices)
-max_arestas = 10  # máximo de arestas (10x número de vértices)
+min_aresta = 1
+max_aresta = 10
 
-# Gerar a matriz de adjacência binária
-matriz_adjacencia_binaria = gerar_matriz_adjacencia_binaria(n_vertices, min_arestas, max_arestas)
-
-# Imprimir a matriz de adjacência gerada
-print(matriz_adjacencia_binaria)
+# Geração do grafo e cálculo de propriedades
+matriz_adjacencia = gerar_grafo_e_matriz(n_vertices, min_aresta, max_aresta)
+print("Matriz de Adjacência Binaria:")
+imprimir_matriz(matriz_adjacencia)
