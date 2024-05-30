@@ -72,7 +72,7 @@ def main():
             print("Mapeamento ij->k (recursivo):", k_rec)
 
         elif opcao == "7":
-            k = 5
+            k = 17
             n_vertices = 10
             ij = mapear_k_para_ij(k, n_vertices)
             print("Mapeamento k->ij:", ij)
@@ -80,8 +80,12 @@ def main():
             print("Mapeamento k->ij (iterativo):", ij_iter)
 
         elif opcao == "8":
-            vetor1 = [1, 2, 3]
-            vetor2 = [4, 5, 6]
+            matriz1 = gerar_grafo_e_matriz(n_vertices, min_aresta, max_aresta)
+            matriz2 = gerar_matriz_binaria(n_vertices, min_aresta, max_aresta)
+            vetor1 = triangular_superior_vetor(matriz1)
+            vetor2 = triangular_superior_vetor(matriz2)
+            print("Vetor 1:", vetor1)
+            print("Vetor 2:", vetor2)
             vetor_unido = unir_vetores(vetor1, vetor2)
             print("União dos vetores:", vetor_unido)
             vetor_intersecao = intersectar_vetores(vetor1, vetor2)
