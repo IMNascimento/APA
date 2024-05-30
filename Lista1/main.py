@@ -1,6 +1,6 @@
 from ex1 import gerar_grafo_e_matriz, imprimir_matriz, calcular_indices_dos_vertices, calcular_numero_de_triangulos
 from ex2 import gerar_matriz_binaria
-from ex3 import gerar_vetor_triangular_superior
+from ex3 import triangular_superior_vetor
 from ex4 import gerar_vetor_compactado
 from ex5 import vetor_compactado_para_matriz
 from ex6 import mapear_ij_para_k, mapear_ij_para_k_iterativo, mapear_ij_para_k_recursivo
@@ -30,22 +30,22 @@ def main():
         max_aresta = 10
         if opcao == "1":
             
-            matriz_adjacencia = gerar_grafo_e_matriz(n_vertices, min_aresta, max_aresta)
+            matriz = gerar_grafo_e_matriz(n_vertices, min_aresta, max_aresta)
             print("Matriz de Adjacência:")
-            imprimir_matriz(matriz_adjacencia)
-            indices = calcular_indices_dos_vertices(matriz_adjacencia)
+            imprimir_matriz(matriz)
+            indices = calcular_indices_dos_vertices(matriz)
             print("Índices dos vértices:", indices)
-            triangulos = calcular_numero_de_triangulos(matriz_adjacencia)
+            triangulos = calcular_numero_de_triangulos(matriz)
             print("Número de triângulos:", triangulos)
         
         elif opcao == "2":
-            matriz_adjacencia_binaria = gerar_matriz_binaria(n_vertices, min_aresta, max_aresta)
+            matriz_adjacencia = gerar_matriz_binaria(n_vertices, min_aresta, max_aresta)
             print("Matriz de Adjacência Binaria:")
-            imprimir_matriz(matriz_adjacencia_binaria)
+            imprimir_matriz(matriz_adjacencia)
     
 
         elif opcao == "3" and matriz_adjacencia is not None:
-            vetor_triangular = gerar_vetor_triangular_superior(matriz_adjacencia)
+            vetor_triangular = triangular_superior_vetor(matriz_adjacencia)
             print("Vetor triangular superior (ex3):", vetor_triangular)
 
         elif opcao == "4" and matriz_adjacencia is not None:
