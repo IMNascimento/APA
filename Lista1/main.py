@@ -1,84 +1,96 @@
-import ex1, ex2, ex3, ex4, ex5, ex6, ex7, ex8
-import random
+from ex1 import gerar_grafo_e_matriz, imprimir_matriz, calcular_indices_dos_vertices, calcular_numero_de_triangulos
+from ex2 import gerar_grafo_e_matriz
+from ex3 import gerar_vetor_triangular_superior
+from ex4 import gerar_vetor_compactado
+from ex5 import vetor_compactado_para_matriz
+from ex6 import mapear_ij_para_k, mapear_ij_para_k_iterativo, mapear_ij_para_k_recursivo
+from ex7 import mapear_k_para_ij, mapear_k_para_ij_iterativo
+from ex8 import unir_vetores, intersectar_vetores
 
 def main():
+    matriz_adjacencia = None
+    vetor_triangular = None
+    vetor_compactado = None
+
     while True:
-        print("\nEscolha uma opção:")
-        print("1. Gerar grafo não orientado")
-        print("2. Gerar matriz de adjacência binária")
-        print("3. Gerar vetor triangular superior")
-        print("4. Gerar vetor compactado")
-        print("5. Reconstruir matriz de adjacência a partir do vetor compactado")
-        print("6. Mapeamento (i, j) para k")
-        print("7. Mapeamento inverso k para (i, j)")
-        print("8. União de vetores")
-        print("9. Interseção de vetores")
+        print("\nMenu de Opções:")
+        print("1. Executar exercício 1 (Gerar Grafo e Matriz)")
+        print("2. Executar exercício 2 (Calcular Vetor Triangular Superior)")
+        print("3. Executar exercício 3 (Gerar Vetor Triangular Superior)")
+        print("4. Executar exercício 4 (Gerar Vetor Compactado)")
+        print("5. Executar exercício 5 (Converter Vetor Compactado para Matriz)")
+        print("6. Executar exercício 6 (Mapeamento ij para k)")
+        print("7. Executar exercício 7 (Mapeamento k para ij)")
+        print("8. Executar exercício 8 (Operações com Vetores)")
         print("0. Sair")
 
-        escolha = int(random.randint(0, 9))
+        opcao = input("Escolha uma opção: ")
+        n_vertices = 10
+        min_aresta = 1
+        max_aresta = 10
+        if opcao == "1":
+            
+            matriz_adjacencia = gerar_grafo_e_matriz(n_vertices, min_aresta, max_aresta)
+            print("Matriz de Adjacência:")
+            imprimir_matriz(matriz_adjacencia)
+            indices = calcular_indices_dos_vertices(matriz_adjacencia)
+            print("Índices dos vértices:", indices)
+            triangulos = calcular_numero_de_triangulos(matriz_adjacencia)
+            print("Número de triângulos:", triangulos)
+        
+        elif opcao == "2" and matriz_adjacencia is not None:
+            matriz_adjacencia_binaria = gerar_grafo_e_matriz(n_vertices, min_aresta, max_aresta)
+            print("Vetor triangular superior:", matriz_adjacencia_binaria)
 
-        if escolha == 0:
-            break
-        elif escolha == 1:
-            n_vertices = 100
-            min_arestas = 1
-            max_arestas = 10
-            matriz_adjacencia = gerar_grafo_e_matriz(n_vertices, min_arestas, max_arestas)
-            print("\nMatriz de Adjacência:")
-            for linha in matriz_adjacencia:
-                print(linha)
-        elif escolha == 2:
-            if 'matriz_adjacencia' not in locals():
-                print("Gere o grafo primeiro.")
-            else:
-                print("\nMatriz de Adjacência:")
-                for linha in matriz_adjacencia:
-                    print(linha)
-        elif escolha == 3:
-            if 'matriz_adjacencia' not in locals():
-                print("Gere o grafo primeiro.")
-            else:
-                vetor_triangular_superior = gerar_vetor_triangular_superior(matriz_adjacencia)
-                print("\nVetor Triangular Superior:")
-                print(vetor_triangular_superior)
-        elif escolha == 4:
-            if 'matriz_adjacencia' not in locals():
-                print("Gere o grafo primeiro.")
+        elif opcao == "3" and matriz_adjacencia is not None:
+            vetor_triangular = gerar_vetor_triangular_superior(matriz_adjacencia)
+            print("Vetor triangular superior (ex3):", vetor_triangular)
+
+        elif opcao == "4" and matriz_adjacencia is not None:
+            vetor_compactado = gerar_vetor_compactado(matriz_adjacencia)
+            print("Vetor compactado:", vetor_compactado)
+
+        elif opcao == "5":
+            if matriz_adjacencia is None:
+                print("Execute a opção 1 primeiro para gerar a matriz de adjacência.")
             else:
                 vetor_compactado = gerar_vetor_compactado(matriz_adjacencia)
-                print("\nVetor Compactado (Lista de Arestas):")
-                print(vetor_compactado)
-        elif escolha == 5:
-            if 'vetor_compactado' not in locals():
-                print("Gere o vetor compactado primeiro.")
-            else:
-                matriz_reconstruida = vetor_compactado_para_matriz(vetor_compactado, n_vertices)
-                print("\nMatriz de Adjacência Reconstruída:")
-                for linha in matriz_reconstruida:
-                    print(linha)
-        elif escolha == 6:
-            i = int(input("Digite i: "))
-            j = int(input("Digite j: "))
+                matriz_recuperada = vetor_compactado_para_matriz(vetor_compactado, len(matriz_adjacencia))
+                print("Matriz recuperada a partir do vetor compactado:")
+                imprimir_matriz(matriz_recuperada)
+
+        elif opcao == "6":
+            i, j = 2, 3
+            n_vertices = 10
             k = mapear_ij_para_k(i, j, n_vertices)
-            print(f"\nMapeamento de ({i}, {j}) para k: {k}")
-        elif escolha == 7:
-            k = int(input("Digite k: "))
-            i, j = mapear_k_para_ij(k, n_vertices)
-            print(f"\nMapeamento inverso de k={k} para (i, j): ({i}, {j})")
-        elif escolha == 8:
-            if 'vetor_triangular_superior' not in locals():
-                print("Gere o vetor triangular superior primeiro.")
-            else:
-                vetor_unido = unir_vetores(vetor_triangular_superior, vetor_triangular_superior)
-                print("\nVetor Unido (União):")
-                print(vetor_unido)
-        elif escolha == 9:
-            if 'vetor_triangular_superior' not in locals():
-                print("Gere o vetor triangular superior primeiro.")
-            else:
-                vetor_intersecao = intersectar_vetores(vetor_triangular_superior, vetor_triangular_superior)
-                print("\nVetor Interseção (Produto Direto):")
-                print(vetor_intersecao)
+            print("Mapeamento ij->k:", k)
+            k_iter = mapear_ij_para_k_iterativo(i, j, n_vertices)
+            print("Mapeamento ij->k (iterativo):", k_iter)
+            k_rec = mapear_ij_para_k_recursivo(i, j, n_vertices)
+            print("Mapeamento ij->k (recursivo):", k_rec)
+
+        elif opcao == "7":
+            k = 5
+            n_vertices = 10
+            ij = mapear_k_para_ij(k, n_vertices)
+            print("Mapeamento k->ij:", ij)
+            ij_iter = mapear_k_para_ij_iterativo(k, n_vertices)
+            print("Mapeamento k->ij (iterativo):", ij_iter)
+
+        elif opcao == "8":
+            vetor1 = [1, 2, 3]
+            vetor2 = [4, 5, 6]
+            vetor_unido = unir_vetores(vetor1, vetor2)
+            print("União dos vetores:", vetor_unido)
+            vetor_intersecao = intersectar_vetores(vetor1, vetor2)
+            print("Interseção dos vetores:", vetor_intersecao)
+
+        elif opcao == "0":
+            print("Saindo...")
+            break
+
+        else:
+            print("Opção inválida ou matriz não gerada. Tente novamente.")
 
 if __name__ == "__main__":
     main()
