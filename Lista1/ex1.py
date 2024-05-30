@@ -1,42 +1,56 @@
-import networkx as nx
 import random
-import numpy as np
 
 def gerar_grafo_e_matriz(n_vertices, min_aresta, max_aresta):
-    # Gerar número aleatório de ligações dentro do intervalo especificado
-    n_arestas = random.randint(min_aresta * n_vertices, max_aresta * n_vertices)
+    max_arestas_possivel = n_vertices * (n_vertices - 1) // 2
+    n_arestas = random.randint(min_aresta * n_vertices, min(max_aresta * n_vertices, max_arestas_possivel))
+    matriz_adjacencia = [[0] * n_vertices for _ in range(n_vertices)]
+    arestas_adicionadas = 0
     
-    # Criar um grafo não orientado
-    G = nx.Graph()
-    # Adicionar vértices ao grafo
-    G.add_nodes_from(range(n_vertices))
-    
-    # Adicionar ligações de forma aleatória até atingir o número desejado de ligações
-    while G.number_of_edges() < n_arestas:
-        # Escolher dois vértices aleatoriamente de uma lista dos nós
-        u, v = random.sample(list(G.nodes), 2)
-        # Adicionar uma ligação entre os vértices se ainda não existir
-        if not G.has_edge(u, v):
-            G.add_edge(u, v)
-    
-    # Obter a matriz de adjacência do grafo
-    matriz_adjacencia = nx.adjacency_matrix(G)
+    while arestas_adicionadas < n_arestas:
+        u = random.randint(0, n_vertices - 1)
+        v = random.randint(0, n_vertices - 1)
+        if u != v and matriz_adjacencia[u][v] == 0:
+            matriz_adjacencia[u][v] = 1
+            matriz_adjacencia[v][u] = 1
+            arestas_adicionadas += 1
+
     return matriz_adjacencia
 
-# Definir número de vértices
+def imprimir_matriz(matriz):
+    for row in matriz:
+        print(row)
+
+def calcular_indices_dos_vertices(matriz):
+    indices = [sum(row) for row in matriz]
+    return indices
+
+def calcular_numero_de_triangulos(matriz):
+    n = len(matriz)
+    triangulos = 0
+    for i in range(n):
+        for j in range(n):
+            for k in range(n):
+                if matriz[i][j] and matriz[j][k] and matriz[k][i]:
+                    triangulos += 1
+    return triangulos // 6
+
+# Configurações do grafo
 n_vertices = 10
-# Gerar a matriz de adjacência do grafo com 10 vértices
-matriz_exemplo = gerar_grafo_e_matriz(n_vertices, 1, 10)
+min_aresta = 1
+max_aresta = 10
 
-# Converter a matriz de adjacência para formato denso e imprimir
-matriz_densa = matriz_exemplo.todense()
-print(matriz_densa)
+# Geração do grafo e cálculo de propriedades
+matriz_adjacencia = gerar_grafo_e_matriz(n_vertices, min_aresta, max_aresta)
+print("Matriz de Adjacência:")
+imprimir_matriz(matriz_adjacencia)
 
-# Calcular o indice de cada vértice usando a matriz de adjacência
-indices = np.sum(matriz_densa, axis=1)
+indices = calcular_indices_dos_vertices(matriz_adjacencia)
 print("Indices dos vértices:", indices)
 
-# Determinar o número de triângulos no grafo
-triangulos = np.trace(matriz_densa @ matriz_densa @ matriz_densa) // 6
+triangulos = calcular_numero_de_triangulos(matriz_adjacencia)
 print("Número de triângulos:", triangulos)
-  
+
+
+
+
+
