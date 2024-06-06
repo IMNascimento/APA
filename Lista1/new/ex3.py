@@ -8,5 +8,5 @@ def triangular_superior_vetor(matriz):
     
     return vetor_binario
 
-
+#A complexidade da função triangular_superior_vetor é O(n2)
 

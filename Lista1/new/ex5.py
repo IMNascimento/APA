@@ -6,4 +6,6 @@ def vetor_compactado_para_matriz(vetor_compactado, n_vertices):
     return matriz_adjacencia
 
 
+#A complexidade da função vetor_compactado_para_matriz é O(n2+k)
+# No pior caso, quando k é proporcional a 𝑛2 a complexidade é O(n2)
 

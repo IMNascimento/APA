@@ -1,3 +1,4 @@
+#Cálculo analítico (algoritmo raiz quadrada)
 
 import math
 
@@ -6,7 +7,7 @@ def mapear_k_para_ij(k, n):
     j = k + i + 1 - n * i + (i * (i + 1)) // 2
     return (i, j)
 
-
+#Procedimento iterativo
 
 def mapear_k_para_ij_iterativo(k, n):
     i = 0
@@ -17,3 +18,5 @@ def mapear_k_para_ij_iterativo(k, n):
     return (i, j)
 
 
+# complexibilidade mapear_k_para_ij é O(1)
+# complexibilidade mapear_k_para_ij_iterativo é O(n)

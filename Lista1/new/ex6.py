@@ -1,9 +1,11 @@
+#Cálculo analítico
 
 def mapear_ij_para_k(i, j, n):
     if i > j:
         i, j = j, i
     return (n * i) - (i * (i + 1) // 2) + (j - i - 1)
 
+#Procedimento iterativo
 
 def mapear_ij_para_k_iterativo(i, j, n):
     if i > j:
@@ -15,6 +17,7 @@ def mapear_ij_para_k_iterativo(i, j, n):
     return k
 
 
+#Procedimento recursivo
 
 def mapear_ij_para_k_recursivo(i, j, n):
     if i > j:

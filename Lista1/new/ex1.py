@@ -36,3 +36,14 @@ def calcular_numero_de_triangulos(matriz):
 
 
 
+
+#gerar_grafo_e_matriz: O(n2)
+#imprimir_matriz O(n2)
+#calcular_indices_dos_vertices O(n2)
+#calcular_numero_de_triangulos O(n3)
+
+#Portanto, as funções apresentadas possuem complexidades diferentes,
+# com a função de cálculo de triângulos sendo a mais complexa, com uma complexidade cúbica
+# O(n3). As outras funções têm complexidade quadrática O(n2).
+
+
