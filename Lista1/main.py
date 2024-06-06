@@ -1,4 +1,4 @@
-from ex1 import gerar_grafo_e_matriz, imprimir_matriz, calcular_indices_dos_vertices, calcular_numero_de_triangulos
+from ex1 import gerar_grafo_e_matriz, imprimir_matriz, calcular_indices_dos_vertices
 from ex2 import gerar_matriz_binaria
 from ex3 import triangular_superior_vetor
 from ex4 import gerar_vetor_compactado
@@ -35,8 +35,6 @@ def main():
             imprimir_matriz(matriz)
             indices = calcular_indices_dos_vertices(matriz)
             print("Índices dos vértices:", indices)
-            triangulos = calcular_numero_de_triangulos(matriz)
-            print("Número de triângulos:", triangulos)
         
         elif opcao == "2":
             matriz_adjacencia = gerar_matriz_binaria(n_vertices, min_aresta, max_aresta)
@@ -57,6 +55,7 @@ def main():
                 print("Execute a opção 1 primeiro para gerar a matriz de adjacência.")
             else:
                 vetor_compactado = gerar_vetor_compactado(matriz_adjacencia)
+                print(vetor_compactado)
                 matriz_recuperada = vetor_compactado_para_matriz(vetor_compactado, len(matriz_adjacencia))
                 print("Matriz recuperada a partir do vetor compactado:")
                 imprimir_matriz(matriz_recuperada)

@@ -4,7 +4,6 @@ def mapear_ij_para_k(i, j, n):
         i, j = j, i
     return (n * i) - (i * (i + 1) // 2) + (j - i - 1)
 
-
 def mapear_ij_para_k_iterativo(i, j, n):
     if i > j:
         i, j = j, i
@@ -13,8 +12,6 @@ def mapear_ij_para_k_iterativo(i, j, n):
         k += n - row - 1
     k += j - i - 1
     return k
-
-
 
 def mapear_ij_para_k_recursivo(i, j, n):
     if i > j:

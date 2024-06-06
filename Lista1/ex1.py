@@ -24,15 +24,5 @@ def calcular_indices_dos_vertices(matriz):
     indices = [sum(row) for row in matriz]
     return indices
 
-def calcular_numero_de_triangulos(matriz):
-    n = len(matriz)
-    triangulos = 0
-    for i in range(n):
-        for j in range(n):
-            for k in range(n):
-                if matriz[i][j] and matriz[j][k] and matriz[k][i]:
-                    triangulos += 1
-    return triangulos // 6
-
 
 
